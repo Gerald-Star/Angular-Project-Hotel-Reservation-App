@@ -96,3 +96,24 @@ npx ng generate service reservation/reservation
 ## How to create interface
 
 npx ng g i models/reservation
+
+
+## What is Angular Router
+- By using the Angular Router you can assign several components to it.
+
+- ng generate module app-routing --flat --module=app
+
+
+## 📌 How to Add app-routing.module.ts in an Angular Project
+In Angular, routing helps navigate between different views (components). If your project doesn’t have app-routing.module.ts, you can generate it manually. Let’s go step by step. 🚀
+
+✅ 1. Generate the Routing Module Using Angular CLI
+Run this command inside your Angular project folder:
+
+- ng generate module app-routing --flat --module=app
+What this does:
+
+Creates app-routing.module.ts in the src/app/ folder.
+Automatically imports it into app.module.ts.
+--flat ensures it’s created in the app/ folder instead of a subfolder.
+--module=app tells Angular to import it into app.module.ts.
