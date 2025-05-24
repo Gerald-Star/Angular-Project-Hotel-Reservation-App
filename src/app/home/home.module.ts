@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { RouterModule } from '@angular/router'; // Import RouterModule
 
-
-
 @NgModule({
   declarations: [
     // Declare components here if any

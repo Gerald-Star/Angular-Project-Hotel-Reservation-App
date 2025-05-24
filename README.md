@@ -71,7 +71,8 @@ Routing and Navigation guide for an overview of how the Router service should be
 @publicApi
 
 
-
+## To start Angular on the browser -local step up dor Angular Live Development
+npx ng serve
 
 ## How to build a module in Angular
 
@@ -87,7 +88,7 @@ npx ng generate component home --module=home
 npx ng generate component reservation-list --module=reservation
 
 
-## How to create a Service
+## How to create a Service in Angular using npx for local setup
 
 npx ng generate service reservation/reservation
 
@@ -117,3 +118,19 @@ Creates app-routing.module.ts in the src/app/ folder.
 Automatically imports it into app.module.ts.
 --flat ensures it’s created in the app/ folder instead of a subfolder.
 --module=app tells Angular to import it into app.module.ts.
+
+
+### Twp Types of Form Validation in Angular
+
+1. Reactive Form Validation - Validate Form in TypeScript Class
+2. Template Driven Form Validation - Template Driven Form Validation
+
+- To use the Reactive Form Validation : Import import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+
+## Form listener (ngSubmit)
+" Use to submit a form by creating a button =onSubmit"
+
+
+# Make a validation using
+*ngIf 

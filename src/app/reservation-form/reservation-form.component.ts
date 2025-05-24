@@ -1,10 +1,53 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reservation-form',
   templateUrl: './reservation-form.component.html',
   styleUrls: ['./reservation-form.component.css']
 })
-export class ReservationFormComponent {
+  
+  // This component is responsible for the reservation form
+  // It uses Angular's Reactive Forms to handle form validation and submission
+  // It also uses Angular Material for UI components
+  // The form includes fields for name, email, phone number, and reservation date
+  // The form is validated to ensure that all fields are filled out correctly
+  // The form is submitted to the server when the user clicks the "Submit" button
+  //* create a reservation FormGroup using FormBuilder
+
+export class ReservationFormComponent implements OnInit {
+  reservationForm: FormGroup = new FormGroup({}); // Initialize the form group
+
+// Create a constructor to initialize/invoke the form group with form controls and validation
+  constructor(private formBuilder: FormBuilder) {
+    
+   
+  }
+  // create a method to handle form submission
+  // This method will be called when the form is submitted
+  // It will check if the form is valid and if so, it will send the data to the server
+  // If the form is not valid, it will display an error message
+  ngOnInit(): void{
+    this.reservationForm = this.formBuilder.group({
+      checkInDate: ['', Validators.required],
+      checkOutDate: ['', Validators.required],
+      guestName: ['', Validators.required],
+      guestEmail: ['', [Validators.required, Validators.email]],
+      roomNumber: ['', [Validators.required, Validators.min(1)]],
+      numberOfGuest: ['', [Validators.required, Validators.min(1)]]
+      
+    })
+  }
+
+
+  // create a method onSubmit() that will be called when the form is submitted
+  onSubmit() {
+   
+      // If the form is valid, send the data to the server
+      console.log('Form submitted successfully');
+      // Here you can add your logic to send the form data to the server
+    
+    
+  }
 
 }
