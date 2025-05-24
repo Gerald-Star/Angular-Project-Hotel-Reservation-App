@@ -134,3 +134,19 @@ Automatically imports it into app.module.ts.
 
 # Make a validation using
 *ngIf 
+
+
+#
+*ngOnIit(): void 
+
+## How to use Dependency Injection in Angular / on the constructor 
+
+* Here you use constructor(private formBuilder: FormBuilder) {
+* // codes
+* }
+
+
+### How to use LocalStorage in storing logins
+
+##### Develop a login with first name, family name, email and password, store it on a localStorage
+Use 

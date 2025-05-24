@@ -18,6 +18,15 @@ export class ReservationService {
   // The Reservation object will be used to get all reservations
   private reservations: Reservation[] = [];
 
+
+  constructor() {
+    // Load reservations from localStorage if available
+    const storedReservations = localStorage.getItem("reservations");
+    if (storedReservations) {
+      this.reservations = JSON.parse(storedReservations);
+    }
+  }
+
    // CRUD operations for reservation data
 
   getReservations(): Reservation[] {
@@ -33,6 +42,11 @@ export class ReservationService {
 
   addReservation(reservation: Reservation): void {
     this.reservations.push(reservation);
+    // Use localStorage to store the reservations
+    localStorage.setItem("reservations", JSON.stringify(this.reservations))
+    //console.log(this.reservations);
+    // Optionally, you can log the reservation to the console for debugging
+    // console.log('Reservation added:', reservation);
   }
 
 
@@ -40,6 +54,8 @@ export class ReservationService {
   deleteReservation(id: string): void {
     let index = this.reservations.findIndex(res => res.id === id);
     this.reservations.splice(index, 1);
+    // Use localStorage to store the reservations
+    localStorage.setItem("reservations", JSON.stringify(this.reservations))
   }
 
   //* Update an existing reservation by id
@@ -47,6 +63,8 @@ export class ReservationService {
   updateReservation(updatedReservation: Reservation): void{
     let index = this.reservations.findIndex(res => res.id === updatedReservation.id);
     this.reservations[index] = updatedReservation;
+    // Use localStorage to store the reservations
+    localStorage.setItem("reservations", JSON.stringify(this.reservations))
   }
 
 
