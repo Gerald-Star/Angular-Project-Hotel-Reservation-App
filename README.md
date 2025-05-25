@@ -150,3 +150,28 @@ Automatically imports it into app.module.ts.
 
 ##### Develop a login with first name, family name, email and password, store it on a localStorage
 Use 
+
+
+### LifeCycle Hooks in Angular
+*ngOnInit
+
+
+### Using ng template syntax to iterate over reservations
+### Using ngFor to iterate over the reservation array and display each reservation's details
+<p *ngIf="reservation.length === 0">No reservations found.</p>
+
+<ul>
+  <ng-container *ngFor="let reservation of reservation">
+    <li>
+      Guest: {{ reservation.guestName }}<br>
+      Email: {{ reservation.guestEmail }}<br>
+      Room No: {{ reservation.roomNumber }}<br>
+      Check-in: {{ reservation.checkInDate | date }}<br>
+      Check-out: {{ reservation.checkOutDate | date }}<br>
+    </li>
+  </ng-container>
+<!-- This code displays a list of reservations with guest details and check-in/check-out dates -->
+
+
+
+### How to navigate users inside your applications from one page to another using the router method 

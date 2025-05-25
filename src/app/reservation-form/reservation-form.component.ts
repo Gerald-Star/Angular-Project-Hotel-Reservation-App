@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReservationService } from '../reservation/reservation.service';
 import { Reservation } from '../models/reservation';
+// implement the router 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reservation-form',
@@ -20,9 +22,12 @@ import { Reservation } from '../models/reservation';
 export class ReservationFormComponent implements OnInit {
   reservationForm: FormGroup = new FormGroup({}); // Initialize the form group
 
-// Create a constructor to initialize/invoke the form group with form controls and validation
+  // Create a constructor to initialize/invoke the form group with form controls and validation
+  // Inject the FormBuilder and ReservationService into the component
+  // Implement the Router to navigate to the reservation list page after successful submission
   constructor(private formBuilder: FormBuilder,
-    private reservationService: ReservationService
+    private reservationService: ReservationService,
+    private router: Router // Inject the Router to navigate after form submission
   ) {
     
    
@@ -52,7 +57,10 @@ export class ReservationFormComponent implements OnInit {
    }
       // If the form is valid, send the data to the server
       //console.log('Form submitted successfully');
-      // Here you can add your logic to send the form data to the server
+    // Here you can add your logic to send the form data to the server
+    
+    // call a method to the router to navigate to the reservation list page
+    this.router.navigate(['/list']);
     
 
     
