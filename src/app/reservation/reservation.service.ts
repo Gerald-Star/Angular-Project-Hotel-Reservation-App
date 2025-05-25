@@ -41,6 +41,8 @@ export class ReservationService {
   //* Add a new reservation to the list
 
   addReservation(reservation: Reservation): void {
+    // Generate a unique ID for the reservation
+    reservation.id = Date.now().toString(); // Using timestamp as a simple unique ID
     this.reservations.push(reservation);
     // Use localStorage to store the reservations
     localStorage.setItem("reservations", JSON.stringify(this.reservations))
