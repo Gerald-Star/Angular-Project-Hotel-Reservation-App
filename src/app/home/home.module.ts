@@ -14,6 +14,8 @@ import { RouterModule } from '@angular/router'; // Import RouterModule
     CommonModule,
     RouterModule // Import RouterModule to enable router-outlet
 
+  ], exports: [
+    HomeComponent
   ]
 })
 export class HomeModule { }

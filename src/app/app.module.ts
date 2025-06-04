@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
 import { ReservationModule } from './reservation/reservation.module';
+import {HttpClientModule } from '@angular/common/http'; // Import HttpClientModule for API calls
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ReservationModule } from './reservation/reservation.module';
     RouterModule,
     AppRoutingModule, // Import RouterModule to enable router-outlet
     HomeModule,
-    ReservationModule
+    ReservationModule,
+    HttpClientModule // Import HttpClientModule to enable HTTP requests
 
   ],
   providers: [],

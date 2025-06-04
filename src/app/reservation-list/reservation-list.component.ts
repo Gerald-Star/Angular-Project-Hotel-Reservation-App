@@ -12,22 +12,29 @@ import { Reservation } from '../models/reservation';
   // It uses the ReservationService to fetch the reservations from the server
 export class ReservationListComponent implements OnInit {
 
-  reservation: Reservation[] = []
+  reservations: Reservation[] = []
 
-  constructor(private reservationService: ReservationService) {
-    
-  }
+  constructor(private reservationService: ReservationService) {}
 
   ngOnInit(): void {
     // Fetch the list of reservations from the server when the component initializes
-    this.reservation = this.reservationService.getReservations(); 
+    //this.reservation = this.reservationService.getReservations(); 
+    this.reservationService.getReservations().subscribe(reservations => {
+      this.reservations = reservations;
+    });
   }
 
   // Method to delete a reservation by its ID
   deleteReservation(id: string) {
-    this.reservationService.deleteReservation(id);
+    this.reservationService.deleteReservation(id).subscribe(() => {
+      console.log("Reservation deleted successfully");
+    }
+    )
     // After deleting, refresh the list of reservations
-    this.reservation = this.reservationService.getReservations();
-  }
+    //this.reservation = this.reservationService.getReservations();
+    //this.reservationService.getReservations().subscribe(reservations => {
+      //this.reservations = reservations;
+    //});
+  } 
 
 }

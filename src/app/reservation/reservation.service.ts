@@ -1,24 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Reservation } from '../models/reservation';
-
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
 
- 
-  // create a property to hold the reservation data
   // This property will be used to store the reservation data in memory
   // It will be an array of Reservation objects
-  // The Reservation object will be defined in the models folder
   // The Reservation object will have properties like id, name, email, phone number, and reservation date
-  // The Reservation object will be used to create a new reservation
-  // The Reservation object will be used to update an existing reservation
-  // The Reservation object will be used to delete a reservation
-  // The Reservation object will be used to get all reservations
+  // The Reservation object creation follows a CRUDE pattern (Create, Read, Update, Delete)
+
+  private apiUrl = "http://localhost:3000"; // Replace with your API endpoint
   private reservations: Reservation[] = [];
 
+  //* To use API, we will create a service that will handle the reservation data and manage CRUD operations.
+  //* The service will be responsible for fetching, adding, updating, and deleting reservations.
 
+  constructor(private http: HttpClient){}
+
+  // The constructor is used to initialize the reservation data
+  // It checks if there are any reservations stored in localStorage
+  // If there are reservations stored in localStorage, it will load them into the reservations array
+  //! Remove the constructor to use API for reservation data management
+  /*
   constructor() {
     // Load reservations from localStorage if available
     const storedReservations = localStorage.getItem("reservations");
@@ -26,71 +32,61 @@ export class ReservationService {
       this.reservations = JSON.parse(storedReservations);
     }
   }
-
-   // CRUD operations for reservation data
-
+*/
+   // CRUD operations for reservation data, now change all reservations to use API CRUDE operations
+  /*
   getReservations(): Reservation[] {
-    return this.reservations;
+    //return this.reservations;
+    return this.reservations
+  }*/
+  
+  //this.http.get(`${this.apiUrl}/reservations`);
+
+  // Rewriting to use API 
+  getReservations(): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(this.apiUrl + "/reservations");
+  } // This method returns an Observable of Reservation array, which can be subscribed to in components
+  // on reservation-list.component.ts, we will subscribe to this observable to get the reservation data ngOnInit()
+
+  getReservation(id: string): Observable<Reservation> {
+    return this.http.get<Reservation>(this.apiUrl + "/reservation/"+id);
   }
 
-  getReservation(id: string): Reservation | undefined {
-    return this.reservations.find(res => res.id === id);
-  }
+  //* Add a new reservation to the list and use localStorage to store the reservations
 
-
-  //* Add a new reservation to the list
-
-  addReservation(reservation: Reservation): void {
+  addReservation(reservation: Reservation): Observable<void> {
+    
+    return this.http.post<void>(this.apiUrl + "/reservation", reservation)
     // Generate a unique ID for the reservation
-    reservation.id = Date.now().toString(); // Using timestamp as a simple unique ID
-    this.reservations.push(reservation);
-    // Use localStorage to store the reservations
-    localStorage.setItem("reservations", JSON.stringify(this.reservations))
+    //reservation.id = Date.now().toString(); // Using timestamp as a simple unique ID
+    //this.reservations.push(reservation);
+    //localStorage.setItem("reservations", JSON.stringify(this.reservations))
     //console.log(this.reservations);
     // Optionally, you can log the reservation to the console for debugging
     // console.log('Reservation added:', reservation);
   }
 
-
   // * Delete a reservation by id
-  deleteReservation(id: string): void {
-    let index = this.reservations.findIndex(res => res.id === id);
-    this.reservations.splice(index, 1);
-    // Use localStorage to store the reservations
-    localStorage.setItem("reservations", JSON.stringify(this.reservations))
+
+  deleteReservation(id: string): Observable<void> {
+    return this.http.delete<void>(this.apiUrl + "/reservation/" + id);
+    
+    //let index = this.reservations.findIndex(res => res.id === id);
+    //this.reservations.splice(index, 1);
+    //localStorage.setItem("reservations", JSON.stringify(this.reservations))
   }
 
   //* Update an existing reservation by id
 
-  updateReservation(updatedReservation: Reservation): void{
-    let index = this.reservations.findIndex(res => res.id === updatedReservation.id);
-    this.reservations[index] = updatedReservation;
-    // Use localStorage to store the reservations
-    localStorage.setItem("reservations", JSON.stringify(this.reservations))
+  updateReservation(id: string, updatedReservation: Reservation): Observable <void>{
+    return this.http.put<void>(this.apiUrl + "/reservation/" + id, updatedReservation);
+      
+      
+    // let index = this.reservations.findIndex(res => res.id === id);
+    //this.reservations[index] = updatedReservation;
+    //localStorage.setItem("reservations", JSON.stringify(this.reservations))
   }
-
-
-
-
-  //*
-
-  /*
-   addReservation(reservation: Reservation): void {
-    this.reservations.push(reservation);
-  }
-
-  updateReservation(id: string, updatedReservation: Reservation): void {
-    const index = this.reservations.findIndex(res => res.id === id);
-    if (index !== -1) {
-      this.reservations[index] = updatedReservation;
-    }
-  }
-
-  deleteReservation(id: string): void {
-    this.reservations = this.reservations.filter(res => res.id !== id);
-  }
-
-  */
+ 
 }
 
 

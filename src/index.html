@@ -1,13 +1,139 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>HotelReservationApp</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .header,
+    .footer {
+      background-image: linear-gradient(to right top, #103e81, #0f3c7f, #0e397e, #0d377c, #0c347a);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .room-grid {
+      display: flex;
+      overflow-x: auto;
+    }
+
+    .column {
+      flex: 0 0 25%;
+      padding: 10px;
+    }
+
+    .fixed-column {
+      position: sticky;
+      left: 0;
+      background-color: #f8f9fa;
+      z-index: 1;
+    }
+
+    .room-card {
+      background: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .room-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .price {
+      color: green;
+      font-weight: bold;
+      display: block;
+      margin: 10px 0;
+    }
+
+    .footer {
+      margin-top: 40px;
+    }
+  </style>
 </head>
+
 <body>
   <app-root></app-root>
+
+  <div class="container-fluid">
+    <div class="room-grid">
+      <!-- Generate 4 columns -->
+      <div class="column fixed-column">
+        <!-- Column 1 -->
+        <div class="room-card" *ngFor="let reservation of reservations">
+          <img
+            src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww"
+            alt="Room">
+          <span class="price">$100 USD</span>
+
+          <button class="btn btn-sm btn-primary" [routerLink]="['/new', reservation.id]">
+            Book Room
+          </button>
+        </div>
+      </div>
+
+      <div class="column fixed-column">
+        <!-- Column 2 -->
+        <div class="room-card" *ngFor="let reservation of reservations">
+          <img
+            src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww"
+            alt="Room">
+          <span class="price">$100 USD</span>
+
+          <button class="btn btn-sm btn-primary" [routerLink]="['/new', reservation.id]">
+            Book Room
+          </button>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Column 3 (scrollable) -->
+        <div class="room-card" *ngFor="let reservation of reservations">
+          <img
+            src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww"
+            alt="Room">
+          <span class="price">$100 USD</span>
+          <button class="btn btn-sm btn-primary" (click)="bookRoom(room)">Book Now</button>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Column 4 (scrollable) -->
+        <div class="room-card" *ngFor="let reservation of reservations">
+          <img
+            src="https://images.unsplash.com/photo-1631049552057-403cdb8f0658?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGhvdGVsJTIwcm9vbXxlbnwwfHwwfHx8MA%3D%3D"
+            alt="Room">
+          <span class="price">$100 USD</span>
+          <button class="btn  btn-sm btn-primary" (click)="bookRoom(room)">Book Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>123 Paradise Hotel Lane, City, Country</p>
+    <p>&copy; 2025 Paradise Hotel. All rights reserved.</p>
+  </div>
+
+  <!-- Optional JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
 </body>
+
 </html>

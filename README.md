@@ -131,7 +131,7 @@ Automatically imports it into app.module.ts.
 ## Form listener (ngSubmit)
 " Use to submit a form by creating a button =onSubmit"
 
-
+## What is dependency injection in Angular
 # Make a validation using
 *ngIf 
 
@@ -175,3 +175,45 @@ Use
 
 
 ### How to navigate users inside your applications from one page to another using the router method 
+
+
+
+
+
+## STEP PROCESSES
+
+Want to Test It?
+
+
+Injecting ReservationService into your component.
+
+Calling getReservations() inside ngOnInit() and logging the result.
+
+
+ngOnInit() {
+  this.reservationService.getReservations().subscribe(data => {
+    console.log(data); // Should log array of reservations from mock
+  });
+}
+
+
+
+## B: Create a New Environment (if you want to use {{url}}) on Postman
+On the left sidebar, click "Environments".
+
+Click "New" → "Environment".
+
+Add a variable:
+
+Key: url
+
+Initial Value: https://<mock-id>.mock.pstmn.io
+
+Current Value: https://<mock-id>.mock.pstmn.io
+
+Click “Save”.
+
+In the top-right corner of Postman, select this environment from the dropdown.
+
+
+https://bf58adcf-72d8-43d9-927b-6824c7142b89.mock.pstmn.io

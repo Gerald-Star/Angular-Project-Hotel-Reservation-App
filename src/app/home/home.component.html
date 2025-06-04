@@ -1,14 +1,42 @@
-<div>
-  <h2>Welcome to the Hotel Reservation Portal!</h2>
-  <button [routerLink]="['/new']" >Create a reservation</button>
-  <button [routerLink]="['/new']" >View all reservations</button>
+<!--
+  Home Component Template
+  This template serves as the main landing page for the hotel reservation application.
+  It includes a welcome message and buttons to navigate to other functionalities.
+-->
+
+<!-- This is the home component that serves as the landing page for the application. -->
+<!-- It provides a welcome message and buttons to navigate to other parts of the application. -->
+
+<!---
+<div class="text-center bg-primary text-white py-5">
+  <h2 class="text-light mb-3">Welcome to the Hotel Reservation Portal!</h2>
+  <p class="text-white mb-4">Here you can manage your hotel reservations with ease.</p>
+  <div class="d-flex justify-content-center gap-3">
+    <button class="btn btn-light" [routerLink]="['/new']">Create a reservation</button>
+    <button class="btn btn-light" [routerLink]="['/list']">View all reservations</button>
+  </div>
+</div>
+
+-->
+
+
+<div class="text-center bg-primary text-white py-5">
+  <div class="container">
+    <h2 class="mb-3">Welcome to the Hotel Reservation Portal!</h2>
+    <p class="mb-4">Here you can manage your hotel reservations with ease.</p>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <button class="btn btn-outline-light px-4" [routerLink]="['/new']">
+        Create a Reservation
+      </button>
+      <button class="btn btn-outline-light px-4" [routerLink]="['/list']">
+        View All Reservations
+      </button>
+    </div>
+  </div>
 </div>
 
 
 <div>
-  <h2>Hotel Reservation</h2>
-  <p>Building Hotel Reservation</p>
-  <p>reservation-list works!</p>
   <router-outlet></router-outlet>
 </div>
 

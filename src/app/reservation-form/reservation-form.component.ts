@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReservationService } from '../reservation/reservation.service';
 import { Reservation } from '../models/reservation';
 // implement the router 
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-reservation-form',
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   
   // This component is responsible for the reservation form
   // It uses Angular's Reactive Forms to handle form validation and submission
-  // It also uses Angular Material for UI components
+
   // The form includes fields for name, email, phone number, and reservation date
   // The form is validated to ensure that all fields are filled out correctly
   // The form is submitted to the server when the user clicks the "Submit" button
@@ -27,25 +27,35 @@ export class ReservationFormComponent implements OnInit {
   // Implement the Router to navigate to the reservation list page after successful submission
   constructor(private formBuilder: FormBuilder,
     private reservationService: ReservationService,
-    private router: Router // Inject the Router to navigate after form submission
+    private router: Router,// Inject the Router to navigate after form submission
+    private activatedRoute: ActivatedRoute // Inject the ActivatedRoute to access route parameters if needed
   ) {
     
    
   }
   // create a method to handle form submission
   // This method will be called when the form is submitted
-  // It will check if the form is valid and if so, it will send the data to the server
+  // It checks if the form is valid and if so, it will send the data to the server
   // If the form is not valid, it will display an error message
   ngOnInit(): void{
     this.reservationForm = this.formBuilder.group({
-      checkInDate: ['', Validators.required],
-      checkOutDate: ['', Validators.required],
       guestName: ['', Validators.required],
       guestEmail: ['', [Validators.required, Validators.email]],
-      roomNumber: ['', [Validators.required, Validators.min(1)]],
-      numberOfGuest: ['', [Validators.required, Validators.min(1)]]
+      numberOfNights: ['', [Validators.required, Validators.min(1)]],
+      numberOfGuests: ['', [Validators.required, Validators.min(1)]],
+      checkInDate: ['', Validators.required],
+      checkOutDate: ['', Validators.required],
       
     })
+    let id = this.activatedRoute.snapshot.paramMap.get('id')
+    if (id) {
+      // If an ID is present in the route, fetch the reservation details for editing
+      this.reservationService.getReservation(id).subscribe(reservation => {
+        if(reservation) 
+          this.reservationForm.patchValue(reservation); // Populate the form with existing data
+      });
+      
+    }
   }
 
 
@@ -53,17 +63,28 @@ export class ReservationFormComponent implements OnInit {
   onSubmit() {
     if (this.reservationForm.valid) {
       let reservation: Reservation = this.reservationForm.value;
-      this.reservationService.addReservation(reservation)
-   }
+      //this.reservationService.addReservation(reservation) - remove this line to add updateReservation method.
+      let id = this.activatedRoute.snapshot.paramMap.get('id')
+
+      if (id) {
+        // If an ID is present, update the existing reservation
+        this.reservationService.updateReservation(id, reservation).subscribe(() => {
+          console.log("Reservation updated successfully");
+        });
+      } else {
+        // If no ID is present, add a new reservation
+        this.reservationService.addReservation(reservation).subscribe(() => {
+          console.log("Reservation added successfully");
+        })
+      }
+   
+    }
       // If the form is valid, send the data to the server
       //console.log('Form submitted successfully');
     // Here you can add your logic to send the form data to the server
     
     // call a method to the router to navigate to the reservation list page
     this.router.navigate(['/list']);
-    
-
-    
     
   }
 
