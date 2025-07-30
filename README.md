@@ -5,7 +5,9 @@ An Angular-based single-page application (SPA).
 
 ### Overview:
 
-This is a responsive Angular-based web application designed to showcase hotel rooms reservation in a clean, user-friendly grid layout. Users can browse available rooms dynamically loaded from a data source and easily navigate to a booking and be able to edit form to reserve their chosen room.
+This is a responsive Angular-based web application designed to showcase hotel room reservations in a clean, user-friendly grid layout. Users can browse available rooms dynamically loaded from a data source and easily navigate to a booking, where they can edit the form to reserve their chosen room.
+
+![Hotel Booking App](https://github.com/Gerald-Star/Angular-Project-Hotel-Reservation-App/blob/aa45a948f38bad8b0ea1606be6910285c1758753/Reservation%20plus%20Mock%20API.png)
 
 ###  Key Angular Concepts Used
 
